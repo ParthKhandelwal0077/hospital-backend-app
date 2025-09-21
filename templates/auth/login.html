@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - Healthcare Management System{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <div class="card shadow">
+            <div class="card-header text-center">
+                <h4 class="mb-0">
+                    <i class="bi bi-box-arrow-in-right"></i>
+                    Login
+                </h4>
+            </div>
+            <div class="card-body">
+                <form method="post" class="needs-validation" novalidate>
+                    {% csrf_token %}
+                    
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% endif %}
+                    
+                    <div class="mb-3">
+                        <label for="id_username" class="form-label">
+                            <i class="bi bi-person"></i> Username
+                        </label>
+                        <input type="text" 
+                               class="form-control {% if form.username.errors %}is-invalid{% endif %}" 
+                               id="id_username" 
+                               name="username" 
+                               value="{{ form.username.value|default:'' }}"
+                               required>
+                        {% if form.username.errors %}
+                            <div class="invalid-feedback">
+                                {{ form.username.errors.0 }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="id_password" class="form-label">
+                            <i class="bi bi-lock"></i> Password
+                        </label>
+                        <input type="password" 
+                               class="form-control {% if form.password.errors %}is-invalid{% endif %}" 
+                               id="id_password" 
+                               name="password" 
+                               required>
+                        {% if form.password.errors %}
+                            <div class="invalid-feedback">
+                                {{ form.password.errors.0 }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-loading">
+                            <i class="bi bi-box-arrow-in-right"></i>
+                            Login
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="text-center mt-3">
+                    <p class="text-muted">Don't have an account?</p>
+                    <a href="{% url 'register' %}" class="btn btn-outline-primary">
+                        <i class="bi bi-person-plus"></i>
+                        Create Account
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Demo credentials info -->
+        <div class="card mt-3 border-info">
+            <div class="card-body text-center">
+                <h6 class="card-title text-info">
+                    <i class="bi bi-info-circle"></i>
+                    Demo Information
+                </h6>
+                <p class="card-text small text-muted">
+                    This is a demo application. You can register a new account or use the API endpoints directly.
+                </p>
+                <a href="/api/" class="btn btn-sm btn-outline-info">
+                    <i class="bi bi-code-square"></i>
+                    View API Documentation
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

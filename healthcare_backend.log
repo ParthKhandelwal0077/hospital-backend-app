@@ -1,0 +1,36 @@
+INFO 2025-09-21 15:51:11,771 autoreload 45103 8450302144 Watching for file changes with StatReloader
+INFO 2025-09-21 15:53:33,534 autoreload 45632 8450302144 Watching for file changes with StatReloader
+WARNING 2025-09-21 15:53:55,231 log 45632 6131593216 Not Found: /favicon.ico
+WARNING 2025-09-21 15:54:51,440 log 45632 6131593216 Method Not Allowed: /api/auth/register/
+WARNING 2025-09-21 15:55:10,379 log 45632 6131593216 Method Not Allowed: /api/auth/register/
+WARNING 2025-09-21 15:55:15,096 log 45632 6131593216 Unauthorized: /api/patients/
+INFO 2025-09-21 16:12:38,889 autoreload 45632 8450302144 /Users/parthkhandelwal/Documents/Healthcare-backend-app/healthcare_backend/settings.py changed, reloading.
+INFO 2025-09-21 16:12:39,327 autoreload 49139 8450302144 Watching for file changes with StatReloader
+INFO 2025-09-21 16:12:53,673 autoreload 49139 8450302144 /Users/parthkhandelwal/Documents/Healthcare-backend-app/healthcare_backend/settings.py changed, reloading.
+INFO 2025-09-21 16:12:53,989 autoreload 49208 8450302144 Watching for file changes with StatReloader
+INFO 2025-09-21 16:13:07,320 autoreload 49208 8450302144 /Users/parthkhandelwal/Documents/Healthcare-backend-app/healthcare_backend/settings.py changed, reloading.
+INFO 2025-09-21 16:13:07,575 autoreload 49259 8450302144 Watching for file changes with StatReloader
+INFO 2025-09-21 16:13:22,908 autoreload 49259 8450302144 /Users/parthkhandelwal/Documents/Healthcare-backend-app/healthcare_backend/settings.py changed, reloading.
+INFO 2025-09-21 16:13:23,185 autoreload 49366 8450302144 Watching for file changes with StatReloader
+INFO 2025-09-21 16:16:25,593 autoreload 49366 8450302144 /Users/parthkhandelwal/Documents/Healthcare-backend-app/healthcare_backend/settings.py changed, reloading.
+INFO 2025-09-21 16:16:26,016 autoreload 50110 8450302144 Watching for file changes with StatReloader
+INFO 2025-09-21 16:27:18,006 autoreload 50110 8450302144 /Users/parthkhandelwal/Documents/Healthcare-backend-app/healthcare_backend/settings.py changed, reloading.
+INFO 2025-09-21 16:27:18,410 autoreload 52112 8450302144 Watching for file changes with StatReloader
+INFO 2025-09-21 16:40:41,059 autoreload 52112 8450302144 /Users/parthkhandelwal/Documents/Healthcare-backend-app/healthcare_backend/settings.py changed, reloading.
+INFO 2025-09-21 16:40:41,390 autoreload 58291 8450302144 Watching for file changes with StatReloader
+INFO 2025-09-21 16:41:48,195 autoreload 58291 8450302144 /Users/parthkhandelwal/Documents/Healthcare-backend-app/healthcare_backend/urls.py changed, reloading.
+INFO 2025-09-21 16:41:48,571 autoreload 59135 8450302144 Watching for file changes with StatReloader
+INFO 2025-09-21 16:42:04,013 autoreload 59135 8450302144 /Users/parthkhandelwal/Documents/Healthcare-backend-app/web/views.py changed, reloading.
+INFO 2025-09-21 16:42:04,301 autoreload 59333 8450302144 Watching for file changes with StatReloader
+INFO 2025-09-21 17:11:35,375 autoreload 59333 8450302144 /Users/parthkhandelwal/Documents/Healthcare-backend-app/web/urls.py changed, reloading.
+INFO 2025-09-21 17:11:35,591 autoreload 81184 8450302144 Watching for file changes with StatReloader
+INFO 2025-09-21 20:07:04,393 autoreload 81184 8450302144 /Users/parthkhandelwal/Documents/Healthcare-backend-app/healthcare_backend/settings.py changed, reloading.
+INFO 2025-09-21 20:07:04,716 autoreload 7041 8450302144 Watching for file changes with StatReloader
+INFO 2025-09-21 20:10:12,553 autoreload 9479 8450302144 Watching for file changes with StatReloader
+INFO 2025-09-21 20:11:01,156 autoreload 7041 8450302144 /Users/parthkhandelwal/Documents/Healthcare-backend-app/web/urls.py changed, reloading.
+INFO 2025-09-21 20:11:01,583 autoreload 10192 8450302144 Watching for file changes with StatReloader
+INFO 2025-09-21 20:11:03,755 autoreload 10192 8450302144 /Users/parthkhandelwal/Documents/Healthcare-backend-app/healthcare_backend/urls.py changed, reloading.
+INFO 2025-09-21 20:11:04,032 autoreload 10250 8450302144 Watching for file changes with StatReloader
+INFO 2025-09-21 20:11:05,146 autoreload 10250 8450302144 /Users/parthkhandelwal/Documents/Healthcare-backend-app/web/views.py changed, reloading.
+INFO 2025-09-21 20:11:05,350 autoreload 10267 8450302144 Watching for file changes with StatReloader
+WARNING 2025-09-21 20:18:52,540 log 10267 6201569280 Not Found: /favicon.ico
