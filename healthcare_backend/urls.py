@@ -59,7 +59,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     
     # Web Interface (Frontend)
-    path('', include('web.urls')),
+    path('', include('authentication.urls')),  # Web views now in authentication app
     
     # API Routes
     path('api/', api_root, name='api_root'),

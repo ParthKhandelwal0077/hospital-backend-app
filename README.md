@@ -4,16 +4,7 @@ A comprehensive fullstack healthcare management system built with Django, Django
 
 ## Features
 
-### Web Interface
-- **Modern UI**: Bootstrap 5-based responsive design with modern UX
-- **User Authentication**: Registration, login, and profile management
-- **Dashboard**: Comprehensive overview with statistics and quick actions
-- **Patient Management**: User-friendly patient records with search and filtering
-- **Doctor Directory**: Browse and manage doctor profiles
-- **Assignment Management**: Patient-doctor mapping with status tracking
-- **API Testing Interface**: Built-in API testing tool
-
-### REST API
+### REST API (Primary Focus)
 - **JWT Authentication**: Secure token-based authentication
 - **Patient Management**: Full CRUD operations for patient records
 - **Doctor Management**: Complete doctor profile management
@@ -26,7 +17,6 @@ A comprehensive fullstack healthcare management system built with Django, Django
 ## Technology Stack
 
 - **Backend**: Django 4.2.7, Django REST Framework 3.14.0
-- **Frontend**: Bootstrap 5, HTML5, CSS3, JavaScript (ES6+)
 - **Authentication**: JWT (djangorestframework-simplejwt 5.3.0)
 - **Database**: PostgreSQL (with SQLite fallback for development)
 - **Static Files**: Whitenoise for production static file serving
@@ -109,7 +99,7 @@ Authorization: Bearer <your-access-token>
 ### 1. Authentication APIs
 
 #### Register User
-- **URL**: `POST /api/auth/register/`
+- **URL**: `POST /api/auth/api_register/`
 - **Description**: Register a new user
 - **Permissions**: Public
 - **Request Body**:
@@ -142,7 +132,7 @@ Authorization: Bearer <your-access-token>
 ```
 
 #### Login User
-- **URL**: `POST /api/auth/login/`
+- **URL**: `POST /api/auth/api_login/`
 - **Description**: Login existing user
 - **Permissions**: Public
 - **Request Body**:
@@ -169,7 +159,7 @@ Authorization: Bearer <your-access-token>
 ```
 
 #### Get User Profile
-- **URL**: `GET /api/auth/profile/`
+- **URL**: `GET /api/auth/api_profile/`
 - **Description**: Get current user profile
 - **Permissions**: Authenticated users only
 
@@ -186,7 +176,7 @@ Authorization: Bearer <your-access-token>
 ### 2. Patient Management APIs
 
 #### List/Create Patients
-- **URL**: `GET/POST /api/patients/`
+- **URL**: `GET/POST /api/patients/api/`
 - **Description**: List all patients created by user or create new patient
 - **Permissions**: Authenticated users only
 
@@ -241,19 +231,19 @@ Authorization: Bearer <your-access-token>
 ```
 
 #### Patient Details
-- **URL**: `GET/PUT/DELETE /api/patients/<id>/`
+- **URL**: `GET/PUT/DELETE /api/patients/api/<id>/`
 - **Description**: Get, update, or delete specific patient
 - **Permissions**: Authenticated users (own patients only)
 
 ### 3. Doctor Management APIs
 
 #### List Doctors
-- **URL**: `GET /api/doctors/`
+- **URL**: `GET /api/doctors/api/`
 - **Description**: List all available doctors
 - **Permissions**: Authenticated users only
 
 #### Create Doctor
-- **URL**: `POST /api/doctors/create/`
+- **URL**: `POST /api/doctors/api/create/`
 - **Description**: Create new doctor profile
 - **Permissions**: Authenticated users only
 - **Request Body**:
@@ -278,17 +268,17 @@ Authorization: Bearer <your-access-token>
 ```
 
 #### Doctor Details
-- **URL**: `GET /api/doctors/<id>/`
+- **URL**: `GET /api/doctors/api/<id>/`
 - **Description**: Get doctor details
 - **Permissions**: Authenticated users only
 
 #### Update Doctor
-- **URL**: `PUT/PATCH /api/doctors/<id>/update/`
+- **URL**: `PUT/PATCH /api/doctors/api/<id>/update/`
 - **Description**: Update doctor details (only by creator)
 - **Permissions**: Authenticated users (own doctors only)
 
 #### Delete Doctor
-- **URL**: `DELETE /api/doctors/<id>/delete/`
+- **URL**: `DELETE /api/doctors/api/<id>/delete/`
 - **Description**: Delete doctor profile (only by creator)
 - **Permissions**: Authenticated users (own doctors only)
 
@@ -373,18 +363,17 @@ Error responses follow this format:
 
 ## Web Interface
 
-The application provides a modern, responsive web interface built with Bootstrap 5:
+The application provides a simple web interface for basic functionality:
 
-- **Home Page**: `http://localhost:8000/` - Landing page with feature overview
+- **Home Page**: `http://localhost:8000/` - Simple landing page
 - **Authentication**: 
   - Register: `http://localhost:8000/register/`
   - Login: `http://localhost:8000/login/`
-  - Profile: `http://localhost:8000/profile/`
-- **Dashboard**: `http://localhost:8000/dashboard/` - Main dashboard with statistics
-- **Patient Management**: `http://localhost:8000/patients/` - Patient records with search/filter
-- **Doctor Directory**: `http://localhost:8000/doctors/` - Browse available doctors
-- **Assignments**: `http://localhost:8000/assignments/` - Patient-doctor mappings
-- **API Testing**: `http://localhost:8000/api-test/` - Built-in API testing interface
+- **Dashboard**: `http://localhost:8000/dashboard/` - Basic dashboard with statistics
+- **Patient Management**: `http://localhost:8000/patients/` - Simple patient listing
+- **Doctor Directory**: `http://localhost:8000/doctors/` - Simple doctor listing
+
+**Note**: The primary focus of this project is the REST API. The web interface provides basic functionality for demonstration purposes.
 
 ## Admin Interface
 
@@ -394,9 +383,45 @@ Access the Django admin at `http://localhost:8000/admin/` with superuser credent
 - Doctors
 - Patient-Doctor Mappings
 
-## Testing
+## API Testing Results
 
-Test the API using tools like Postman, curl, or any HTTP client. Example requests are provided in the API documentation above.
+All API endpoints have been thoroughly tested and verified to be working correctly:
+
+### ✅ Authentication APIs - All Working
+- User registration with JWT tokens ✅
+- User login with JWT tokens ✅  
+- User profile retrieval (protected) ✅
+- Token refresh functionality ✅
+- Proper authentication protection ✅
+
+### ✅ Patient Management APIs - All Working
+- List patients (authenticated users only) ✅
+- Create new patients ✅
+- Retrieve patient details ✅
+- Update patient information ✅
+- Delete patient records ✅
+
+### ✅ Doctor Management APIs - All Working
+- List all doctors ✅
+- Create new doctor profiles ✅
+- Retrieve doctor details ✅
+- Update doctor information (PATCH supported) ✅
+- Delete doctor profiles ✅
+
+### ✅ Patient-Doctor Mapping APIs - All Working
+- Create patient-doctor assignments ✅
+- List all mappings ✅
+- Get patient's assigned doctors ✅
+- Update mapping status and notes ✅
+- Delete mappings ✅
+
+### 🔒 Security Verification
+- All protected endpoints properly reject unauthenticated requests ✅
+- JWT authentication working across all endpoints ✅
+- User data isolation enforced ✅
+- Proper HTTP status codes returned ✅
+
+Test the API using tools like Postman, curl, or any HTTP client. Example curl commands are provided in the API documentation above.
 
 ## Deployment Considerations
 

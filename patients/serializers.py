@@ -14,7 +14,7 @@ class PatientSerializer(serializers.ModelSerializer):
             'blood_type', 'allergies', 'medical_history', 'created_by_username',
             'created_at', 'updated_at'
         ]
-        read_only_fields = ['id', 'created_at', 'updated_at', 'full_name', 'created_by_username']
+        read_only_fields = ['id', 'created_at', 'updated_at']
 
     def validate_email(self, value):
         """Ensure email is unique"""
