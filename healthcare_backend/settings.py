@@ -89,22 +89,34 @@ WSGI_APPLICATION = 'healthcare_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# Database configuration
-# Use PostgreSQL for production (Render), SQLite for development
+# Database configuration with fallback to SQLite
 import os
 
+# Check for DATABASE_URL first (common in deployment platforms)
 if config('DATABASE_URL', default=None):
-    # Production: Use DATABASE_URL from Render PostgreSQL service
+    # Production: Use DATABASE_URL (Railway, Heroku, etc.)
     import dj_database_url
     DATABASES = {
         'default': dj_database_url.parse(config('DATABASE_URL'))
     }
+elif config('DB_ENGINE', default='') == 'django.db.backends.postgresql':
+    # Production: Manual PostgreSQL configuration
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': config('DB_NAME', default='healthcare_db'),
+            'USER': config('DB_USER', default='postgres'),
+            'PASSWORD': config('DB_PASSWORD', default=''),
+            'HOST': config('DB_HOST', default='localhost'),
+            'PORT': config('DB_PORT', default='5432'),
+        }
+    }
 else:
-    # Development: Use SQLite
+    # Development: SQLite configuration (default)
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'healthcare_db.sqlite3',
+            'NAME': BASE_DIR / config('DB_NAME', default='healthcare_db.sqlite3'),
         }
     }
 
@@ -253,7 +265,7 @@ LOGGING = {
     },
 }
 
-# Production Settings for Render Deployment
+# Production Settings for Deployment
 if not DEBUG:
     # Security settings for production
     SECURE_BROWSER_XSS_FILTER = True
@@ -261,7 +273,7 @@ if not DEBUG:
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_SECONDS = 31536000
     SECURE_REDIRECT_EXEMPT = []
-    SECURE_SSL_REDIRECT = True
+    SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', default=True, cast=bool)
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     
     # Cookie security

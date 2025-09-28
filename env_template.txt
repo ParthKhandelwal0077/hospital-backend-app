@@ -1,0 +1,22 @@
+# Environment Variables Template
+# Copy these to your deployment platform's environment variables section
+
+# Django Settings
+SECRET_KEY=your-super-secret-key-here-make-it-long-and-random-50-characters-minimum
+DEBUG=False
+ALLOWED_HOSTS=your-domain.railway.app,your-domain.onrender.com,localhost,127.0.0.1
+
+# Database Configuration (PostgreSQL for production)
+DB_ENGINE=django.db.backends.postgresql
+DB_NAME=healthcare_db
+DB_USER=your_database_user
+DB_PASSWORD=your_database_password
+DB_HOST=your_database_host
+DB_PORT=5432
+
+# JWT Configuration (Optional - defaults provided)
+JWT_ACCESS_TOKEN_LIFETIME_MINUTES=60
+JWT_REFRESH_TOKEN_LIFETIME_DAYS=7
+
+# Security Settings (Optional - defaults for production)
+SECURE_SSL_REDIRECT=True
