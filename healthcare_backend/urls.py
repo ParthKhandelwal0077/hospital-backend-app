@@ -19,6 +19,7 @@ from django.urls import path, include
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+from authentication.urls import api_urlpatterns
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
@@ -31,6 +32,7 @@ def api_root(request):
             'authentication': {
                 'register': '/api/auth/register/',
                 'login': '/api/auth/login/',
+                'logout': '/api/auth/logout/',
                 'profile': '/api/auth/profile/',
                 'token_refresh': '/api/auth/token/refresh/',
             },
@@ -58,12 +60,10 @@ urlpatterns = [
     # Admin
     path('admin/', admin.site.urls),
     
-    # Web Interface (Frontend)
-    path('', include('authentication.urls')),  # Web views now in authentication app
     
     # API Routes
     path('api/', api_root, name='api_root'),
-    path('api/auth/', include('authentication.urls')),
+    path('api/auth/', include(api_urlpatterns)),  # API views
     path('api/patients/', include('patients.urls')),
     path('api/doctors/', include('doctors.urls')),
     path('api/mappings/', include('mappings.urls')),

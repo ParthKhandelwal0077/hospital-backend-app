@@ -1,3 +1,4 @@
+# Core Django packages
 Django==4.2.7
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.3.0
@@ -5,5 +6,11 @@ python-decouple==3.8
 django-cors-headers==4.3.1
 whitenoise==6.6.0
 
-# PostgreSQL adapter (install manually if using PostgreSQL)
-# psycopg2-binary==2.9.9  # Uncomment and install if using PostgreSQL
+# Production dependencies
+gunicorn==21.2.0
+psycopg2-binary==2.9.9
+dj-database-url==2.1.0
+
+# Additional production packages
+requests==2.32.5
+certifi==2025.8.3

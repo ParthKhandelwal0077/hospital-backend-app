@@ -89,26 +89,22 @@ WSGI_APPLICATION = 'healthcare_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# Database configuration with fallback to SQLite
-DB_ENGINE = config('DB_ENGINE', default='django.db.backends.sqlite3')
+# Database configuration
+# Use PostgreSQL for production (Render), SQLite for development
+import os
 
-if DB_ENGINE == 'django.db.backends.postgresql':
+if config('DATABASE_URL', default=None):
+    # Production: Use DATABASE_URL from Render PostgreSQL service
+    import dj_database_url
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': config('DB_NAME', default='healthcare_db'),
-            'USER': config('DB_USER', default='postgres'),
-            'PASSWORD': config('DB_PASSWORD', default=''),
-            'HOST': config('DB_HOST', default='localhost'),
-            'PORT': config('DB_PORT', default='5432'),
-        }
+        'default': dj_database_url.parse(config('DATABASE_URL'))
     }
 else:
-    # SQLite configuration (default for development)
+    # Development: Use SQLite
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / config('DB_NAME', default='healthcare_db.sqlite3'),
+            'NAME': BASE_DIR / 'healthcare_db.sqlite3',
         }
     }
 
@@ -157,10 +153,8 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# Login URLs
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/dashboard/'
-LOGOUT_REDIRECT_URL = '/'
+# API-only backend - no web login URLs needed
+# LOGIN_URL, LOGIN_REDIRECT_URL, and LOGOUT_REDIRECT_URL are not needed for API-only backends
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -198,13 +192,33 @@ SIMPLE_JWT = {
 
 # CORS Configuration
 CORS_ALLOWED_ORIGINS = [
+    # Development domains
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "http://localhost:8080",
     "http://127.0.0.1:8080",
+    "http://192.168.1.3:3000",
+    
+    # Production domains (Vercel)
+    "https://hospital-frontend-app.vercel.app",
+    "https://hospital-frontend-app-parthkhandelwal0077s-projects.vercel.app",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
+
+# CSRF Configuration - Required for POST requests from frontend
+CSRF_TRUSTED_ORIGINS = [
+    # Development domains
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:8080",
+    "http://127.0.0.1:8080",
+    "http://192.168.1.3:3000",
+    
+    # Production domains (Vercel)
+    "https://hospital-frontend-app.vercel.app",
+    "https://hospital-frontend-app-parthkhandelwal0077s-projects.vercel.app",
+]
 
 # Logging Configuration
 LOGGING = {
@@ -238,3 +252,27 @@ LOGGING = {
         'level': 'INFO',
     },
 }
+
+# Production Settings for Render Deployment
+if not DEBUG:
+    # Security settings for production
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_REDIRECT_EXEMPT = []
+    SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    
+    # Cookie security
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_HTTPONLY = True
+    CSRF_COOKIE_HTTPONLY = True
+    
+    # Static files configuration for production
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    
+    # Logging configuration for production
+    LOGGING['handlers']['console']['level'] = 'WARNING'
+    LOGGING['handlers']['file']['level'] = 'ERROR'
